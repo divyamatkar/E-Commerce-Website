@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Myntra Clone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Arial', sans-serif; background: #fff; scroll-behavior: smooth; }
+
+    .header {
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff3f6c, #ff8c42);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+    .nav-links a { text-decoration: none; color: #282c3f; font-weight: 600; font-size: 14px; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: #ff3f6c; }
+
+    .header-icons { display: flex; gap: 20px; align-items: center; justify-content: flex-end; }
+    .header-icon { text-align: center; color: #282c3f; font-size: 12px; font-weight: 600; text-decoration: none; }
+    .header-icon i { display: block; font-size: 20px; margin-bottom: 4px; }
+    .header-icon:hover { color: #ff3f6c; }
+    .cart-count { position: absolute; top: -5px; right: -10px; background: #ff3f6c; color: #fff; border-radius: 50%; font-size: 11px; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+
+    .main-banner {
+      position: relative;
+      height: 90vh;
+      overflow: hidden;
+    }
+    .banner-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    .banner-content {
+      position: relative;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      padding: 0 15px;
+    }
+    .banner-content h1 {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .banner-content p {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+    .banner-btn {
+      background: #fff;
+      color: #667eea;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .banner-btn:hover { transform: translateY(-2px); }
+
+    section { padding: 80px 0; }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
+    .section-box {
+      background: #fff;
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .brands-section .brand-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+      transition: 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .brands-section .brand-card:hover { transform: scale(1.05); }
+    .brand-logo { max-width: 100px; height: 60px; object-fit: contain; }
+
+    .footer {
+      background: #282c3f;
+      color: #fff;
+      padding: 40px 0 20px;
+    }
+    .footer-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a {
+      color: #94969f;
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: #fff; }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      font-size: 22px;
+    }
+    .social-icons a { color: #94969f; }
+    .social-icons a:hover { color: #ff3f6c; }
+    .footer-bottom {
+      border-top: 1px solid #3e4152;
+      padding-top: 15px;
+      font-size: 12px;
+      text-align: center;
+      color: #94969f;
+    }
+
+    @media (max-width: 992px) { .nav-links { display: none; } }
+    @media (max-width: 768px) {
+      .banner-content h1 { font-size: 28px; }
+      .banner-content p { font-size: 16px; }
+      .banner-btn { font-size: 14px; padding: 10px 25px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container-fluid px-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <a href="#" class="logo">MYNTRA</a>
+      <button class="btn d-lg-none" data-bs-toggle="collapse" data-bs-target="#navbarMenu"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links d-none d-lg-flex">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="header-icons">
+        <a href="#" class="header-icon position-relative"><i class="far fa-user"></i><span class="d-none d-md-block">Profile</span></a>
+        <a href="#" class="header-icon"><i class="far fa-heart"></i><span class="d-none d-md-block">Wishlist</span></a>
+        <a href="#" class="header-icon position-relative">
+          <i class="fas fa-shopping-bag"></i><span class="d-none d-md-block">Bag</span>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+    <div class="collapse" id="navbarMenu">
+      <ul class="nav-links flex-column mt-3">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- Banner -->
+<section id="home" class="main-banner">
+  <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=800&fit=crop" alt="Banner" class="banner-image">
+  <div class="banner-content">
+    <h1>Fashion at Your Fingertips</h1>
+    <p>Discover the latest trends in clothing, accessories, and more</p>
+    <button class="banner-btn">Shop Now</button>
+  </div>
+</section>
+
+<!-- About Section -->
+<!-- About Section -->
+<section id="about" style="background: #f8f9fa;">
+  <div class="container">
+    <h2 class="section-title">About Us</h2>
+    <div class="section-box">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+          <img src="https://images.unsplash.com/photo-1600180758890-6d9aa1a0d67d?auto=format&fit=crop&w=800&q=80" alt="About Fashion" class="img-fluid rounded shadow-sm">
+        </div>
+        <div class="col-md-6">
+          <h3 class="mb-3">Redefining Style, One Click at a Time</h3>
+          <p>At <strong>Myntra Clone</strong>, fashion is more than just clothing — it’s a lifestyle. We’ve built a platform that brings the biggest brands and latest trends right to your doorstep. Whether it’s casual tees or statement pieces, we’ve got something for every mood and moment.</p>
+          <p>Our team of fashion curators, tech wizards, and customer care specialists are united by one goal: to offer an unmatched shopping experience.</p>
+
+          <div class="row mt-4">
+            <div class="col-6 mb-3">
+              <i class="fas fa-truck-fast fa-lg text-primary me-2"></i><strong>Fast Delivery</strong>
+            </div>
+            <div class="col-6 mb-3">
+              <i class="fas fa-tags fa-lg text-success me-2"></i><strong>Top Deals</strong>
+            </div>
+            <div class="col-6 mb-3">
+              <i class="fas fa-user-shield fa-lg text-danger me-2"></i><strong>Secure Payments</strong>
+            </div>
+            <div class="col-6 mb-3">
+              <i class="fas fa-undo fa-lg text-warning me-2"></i><strong>Easy Returns</strong>
+            </div>
+          </div>
+
+          <a href="#categories" class="btn btn-primary mt-3 px-4">Explore Categories</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Categories Section -->
+<section id="categories" style="background: #fff;">
+  <div class="container">
+    <h2 class="section-title">Categories</h2>
+    <div class="section-box">
+      <div class="row g-3 justify-content-center">
+        <div class="col-6 col-sm-4 col-md-2">
+          <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/H%26M-Logo.svg" class="brand-logo" alt="Men"></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" class="brand-logo" alt="Women"></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" class="brand-logo" alt="Kids"></div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2">
+          <div class="brand-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" class="brand-logo" alt="Accessories"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" style="background: #f8f9fa;">
+  <div class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="section-box">
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Your Name</label>
+          <input type="text" class="form-control" id="name" placeholder="John Doe">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" placeholder="you@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" rows="4" placeholder="Write your message here..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary px-4">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row text-md-start text-center">
+      <div class="col-md-3 mb-4">
+        <h4 class="footer-title">Online Shopping</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h4 class="footer-title">Useful Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h4 class="footer-title">Policies</h4>
+        <ul class="footer-links">
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h4 class="footer-title">Social</h4>
+        <div class="social-icons justify-content-center justify-content-md-start">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Myntra Clone. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
